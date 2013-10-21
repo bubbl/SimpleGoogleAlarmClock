@@ -38,5 +38,7 @@ or to run it in background:
 
 #### Todo
 Clean up the code. 
+
 Seriously! It is a mess. 
+
 My excuse? These are my first few lines of Python, ever. ;)
