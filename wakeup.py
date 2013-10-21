@@ -54,7 +54,7 @@ def FullTextQuery(calendar_service):
     query.singleevents = 'true'
     query.orderBy = 'startTime'
     query.sortorder = 'a'
-#    query.max_results = '10'
+    query.max_results = '10 # limit the number of events visible in the print output
     feed = calendar_service.CalendarQuery(query)
     for i, an_event in enumerate(feed.entry):
         for a_when in an_event.when:
@@ -71,12 +71,18 @@ def FullTextQuery(calendar_service):
             else:
                 print "Wait for it..." #the event's start time is not the system's current time
  
+#************************************************************************************# 
+#****           Function to be run by Scheduler                                  ****#
+#************************************************************************************# 
 def callable_func():
     os.system("clear") #this is more for my benefit and is in no way necesarry
     print "----------------------------"
     FullTextQuery(calendar_service)
     print "----------------------------"
 
+#************************************************************************************# 
+#****           Run scheduler service                                            ****#
+#************************************************************************************# 
 sched = Scheduler(standalone=True)
-sched.add_interval_job(callable_func,seconds=10)
-sched.start() #runs the program indefinatly on an interval of x seconds 
+sched.add_interval_job(callable_func,seconds=10) #define refresh rate. Set to every 10 seconds by default
+sched.start() #runs the program indefinatly on an interval of x seconds
