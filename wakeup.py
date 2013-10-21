@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 #These are the imports google said to include
-import gdata.calendar
 import gdata.calendar.service
 import gdata.service
 import atom.service
+import gdata.calendar
 import atom
 import getopt
 import sys
@@ -21,19 +21,20 @@ logging.basicConfig()
  
 # Login credentials
 calendar_service = gdata.calendar.service.CalendarService()
-calendar_service.email = '***@gmail.com' #your email
-calendar_service.password = '***' #your password
+calendar_service.email = 'you@gmail.com' #your email
+calendar_service.password = '' #your password
 calendar_service.source = 'SimpleGoogleAlarmClock'
 calendar_service.ProgrammaticLogin()
-
-def FullTextQuery(calendar_service, text_query='wake'):
+ 
+def FullTextQuery(calendar_service):
+    q = 'wake'
     date = datetime.now().strftime("%Y-%m-%dT%H:%M:%S.000Z")
     endDate = (datetime.now() + timedelta(days=14)).strftime("%Y-%m-%dT%H:%M:%S.000Z")
-    print 'Full text query for events on Primary Calendar: \'%s\'' % ( text_query,)
-    query = gdata.calendar.service.CalendarEventQuery('default', 'private', 'full', text_query)
+    print 'Full text query for events on Primary Calendar: \'%s\'' % (q)
+    query = gdata.calendar.service.CalendarEventQuery('default', 'private', 'full', q)
     query.timeMin = date
     query.timeMax = endDate
-    query.ctz = 'Europe/London'
+#    query.ctz = 'Europe/London'
     query.singleevents = 'true'
     query.orderBy = 'startTime'
     query.max_results = '10'
