@@ -74,5 +74,5 @@ def callable_func():
     print "----------------------------"
  
 scheduler = Scheduler(standalone=True)
-scheduler.add_interval_job(callable_func,seconds=5)
+scheduler.add_interval_job(callable_func,seconds=10)
 scheduler.start() #runs the program indefinatly on an interval of 10 seconds
