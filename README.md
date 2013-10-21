@@ -17,11 +17,6 @@ It needs the following libraries installed on your Raspberry Pi:
 > tar -zxvf pyfeed-0.7.4.tar.gz<BR>
 > cd pyfeed-0.7.4<BR>
 > sudo python setup.py install</code>
-* xe:<BR>
-<code>> wget http://sourceforge.net/projects/salix-sbo/files/13.37/xe/xe-0.7.4.tar.gz<BR>
-> tar -zxvf xe-0.7.4.tar.gz<BR>
-> cd xe-0.7.4.tar.gz<BR>
-> sudo python setup.py install</code>
 * mpg321:
 <code>> sudo apt-get install -y mpg321</code>
 
