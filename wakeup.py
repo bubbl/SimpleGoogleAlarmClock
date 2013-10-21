@@ -10,7 +10,6 @@ import string
 import time
 from ConfigParser import SafeConfigParser
  
-import xe #for the time comparator
 from feed.date.rfc3339 import tf_from_timestamp #also for the comparator
 from datetime import datetime, timedelta #for the time on the rpi end
 from apscheduler.scheduler import Scheduler #this will let us check the calender on a regular interval
