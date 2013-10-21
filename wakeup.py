@@ -28,8 +28,8 @@ global email, password, q, mp3_path
 parser = SafeConfigParser()
 parser.read('wakeup.cfg')
 
-email = parser.get('google_calendar', 'email')
-password = parser.get('google_calendar', 'password')
+email = parser.get('google_credentials', 'email')
+password = parser.get('google_credentials', 'password')
 q = parser.get('alarm_clock', 'query')
 mp3_path = parser.get('alarm_clock', 'mp3_path')
 
