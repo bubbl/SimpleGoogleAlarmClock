@@ -1,28 +1,30 @@
 #!/usr/bin/env python
-import gdata.calendar.service as GServ
+#
+# Simple Google Calendar Alarm Clock
+#
+# Author: Bart Bania
+#
+# Website: http://www.bartbania.com
+#
+import gdata.calendar.service as GServ 
 import gdata.service
-import gdata.calendar
+import gdata.calendar # for connection with GCalendar
 import atom
 import atom.service
-import getopt
-import sys
-import string
 import time
 from ConfigParser import SafeConfigParser
+import os, random #to play the mp3 later
  
 from feed.date.rfc3339 import tf_from_timestamp #also for the comparator
 from datetime import datetime, timedelta #for the time on the rpi end
 from apscheduler.scheduler import Scheduler #this will let us check the calender on a regular interval
-import os, random #to play the mp3 later
 
-import logging
-
-logging.basicConfig()
+#import logging # used for development. Not needed for normal usage.
+#logging.basicConfig()
 
 #************************************************************************************# 
 #****           Global variables that can be changed in wakeup.cfg file          ****#
 #************************************************************************************# 
-
 global email, password, q, mp3_path
 parser = SafeConfigParser()
 parser.read('wakeup.cfg')
@@ -35,7 +37,6 @@ mp3_path = parser.get('alarm_clock', 'mp3_path')
 #************************************************************************************# 
 #****           Login credentials for your Google Account                        ****#
 #************************************************************************************# 
-
 calendar_service = GServ.CalendarService()
 calendar_service.email = email
 calendar_service.password = password
@@ -45,8 +46,6 @@ calendar_service.ProgrammaticLogin()
 #************************************************************************************# 
 #****           Main querry definition                                           ****#
 #************************************************************************************# 
-
-
 def FullTextQuery(calendar_service):
     date = datetime.now().strftime("%Y-%m-%dT%H:%M:%S.000Z")
     endDate = (datetime.now() + timedelta(days=14)).strftime("%Y-%m-%dT%H:%M:%S.000Z")
@@ -54,11 +53,10 @@ def FullTextQuery(calendar_service):
     query = GServ.CalendarEventQuery('default', 'private', 'full', q)
     query.timeMin = date
     query.timeMax = endDate
-#    query.ctz = 'Europe/London'
     query.singleevents = 'true'
     query.orderBy = 'startTime'
     query.sortorder = 'a'
-    query.max_results = '10'
+#    query.max_results = '10'
     feed = calendar_service.CalendarQuery(query)
     for i, an_event in enumerate(feed.entry):
         for a_when in an_event.when:
@@ -83,4 +81,4 @@ def callable_func():
 
 sched = Scheduler(standalone=True)
 sched.add_interval_job(callable_func,seconds=10)
-sched.start() #runs the program indefinatly on an interval of 10 seconds 
+sched.start() #runs the program indefinatly on an interval of x seconds 
