@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 #These are the imports google said to include
+import gdata.calendar
 import gdata.calendar.service
 import gdata.service
 import atom.service
-import gdata.calendar
-import gdata.calendar
 import atom
 import getopt
 import sys
@@ -24,7 +23,7 @@ logging.basicConfig()
 calendar_service = gdata.calendar.service.CalendarService()
 calendar_service.email = '***@gmail.com' #your email
 calendar_service.password = '***' #your password
-calendar_service.source = 'Google-Calendar_Python_Sample-1.0'
+calendar_service.source = 'SimpleGoogleAlarmClock'
 calendar_service.ProgrammaticLogin()
 
 def FullTextQuery(calendar_service, text_query='wake'):
