@@ -18,7 +18,7 @@ from datetime import datetime, timedelta #for the time on the rpi end
 from apscheduler.scheduler import Scheduler #this will let us check the calender on a regular interval
 
 #import logging # used for development. Not needed for normal usage.
-#logging.basicConfig()
+#logging.basicConfig(filename='log.log', filemode='w')
 
 #************************************************************************************# 
 #****           Global variables that can be changed in wakeup.cfg file          ****#
