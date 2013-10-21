@@ -13,7 +13,8 @@ It needs the following libraries installed on your Raspberry Pi:
 * [Google Data Library](https://developers.google.com/gdata/articles/python_client_lib#linux)
 * [APScheduler](http://pythonhosted.org/APScheduler/#installing-apscheduler)
 * PyFeed:<BR>
-<code>> wget http://sourceforge.net/projects/salix-sbo/files/13.37/pyfeed/pyfeed-0.7.4.tar.gz<BR>
+can be found in **libs** directory. From the repository dir:<BR>
+<code>> cd libs<BR>
 > tar -zxvf pyfeed-0.7.4.tar.gz<BR>
 > cd pyfeed-0.7.4<BR>
 > sudo python setup.py install</code>
