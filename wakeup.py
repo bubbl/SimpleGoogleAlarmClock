@@ -32,15 +32,11 @@ def FullTextQuery(calendar_service, text_query='wake'):
     endDate = (datetime.now() + timedelta(days=14)).strftime("%Y-%m-%dT%H:%M:%S.000Z")
     print 'Full text query for events on Primary Calendar: \'%s\'' % ( text_query,)
     query = gdata.calendar.service.CalendarEventQuery('default', 'private', 'full', text_query)
-#    time.strftime('%Y-%m-%d %H:%M')
-#    query.start_min = '2013-10-01T00:00:00'
-#    query.start_max = '2014-11-10T23:59:59'
     query.timeMin = date
     query.timeMax = '2014-11-10T23:59:59'
     query.ctz = 'Europe/London'
     query.singleevents = 'true'
     query.orderBy = 'startTime'
-#    query.sortorder = 'd'
     query.max_results = '10'
     feed = calendar_service.CalendarQuery(query)
     for i, an_event in enumerate(feed.entry):
