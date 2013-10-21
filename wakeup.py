@@ -68,9 +68,9 @@ def FullTextQuery(calendar_service):
             if time.strftime('%d-%m-%Y %H:%M',time.localtime(tf_from_timestamp(a_when.start_time))) == time.strftime('%d-%m-%Y %H:%M'):
                 print "Waking you up!"
                 print "---" 
-                songfile = random.choice(os.listdir(mp3_dir)) #chooses the .mp3 file
+                songfile = random.choice(os.listdir(mp3_path)) #chooses the .mp3 file
                 print "Now Playing:", songfile
-                command ="mpg321" + " " + mp3_dir + "'"+songfile+"'"+ " -g 100" #plays the MP3 in it's entierty. As long as the song is longer than a minute then will only trigger once in the minute that start of the event
+                command ="mpg321" + " " + mp3_path + "'"+songfile+"'"+ " -g 100" #plays the MP3 in it's entierty. As long as the song is longer than a minute then will only trigger once in the minute that start of the event
                 print command
                 os.system(command) #runs the bash command
             else:
