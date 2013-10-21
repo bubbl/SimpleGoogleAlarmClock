@@ -9,8 +9,6 @@
 import gdata.calendar.service as GServ 
 import gdata.service
 import gdata.calendar # for connection with GCalendar
-import atom
-import atom.service
 import time
 from ConfigParser import SafeConfigParser
 import os, random #to play the mp3 later
