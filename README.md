@@ -1,4 +1,4 @@
-alarm_clock.py 
+wakeup.py 
 ===========
 
 An alarm clock that syncs with Google Calendar, written in Python.
