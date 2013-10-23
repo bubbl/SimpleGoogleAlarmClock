@@ -8,26 +8,27 @@
 #
 import gdata.calendar.service as GServ            #for connection with GCalendar
 import time
-from ConfigParser import SafeConfigParser
 import os
 import random                                     #to play the mp3 later
+from ConfigParser import SafeConfigParser
 from feed.date.rfc3339 import tf_from_timestamp   #also for the comparator
 from datetime import datetime, timedelta          #for the time on the rpi end
 from apscheduler.scheduler import Scheduler       #this will let us check the calender on a regular interval
 #import logging                                   # used for development. Not needed for normal usage.
 #logging.basicConfig(filename='wakeup.log', filemode='w')
 
+parser = SafeConfigParser()                       # initiate Parser and read the configuration file
+parser.read('wakeup.cfg')
 #************************************************************************************# 
 #****           Global variables that can be changed in wakeup.cfg file          ****#
 #************************************************************************************# 
-global email, password, q, mp3_path
-parser = SafeConfigParser()
-parser.read('wakeup.cfg')
-
 email = parser.get('google_credentials', 'email')
 password = parser.get('google_credentials', 'password')
 q = parser.get('alarm_clock', 'query')
 mp3_path = parser.get('alarm_clock', 'mp3_path')
+
+date = datetime.now().strftime("%Y-%m-%dT%H:%M:%S.000Z")
+endDate = (datetime.now() + timedelta(days=14)).strftime("%Y-%m-%dT%H:%M:%S.000Z")
 
 #************************************************************************************# 
 #****           Login credentials for your Google Account                        ****#
@@ -42,16 +43,13 @@ calendar_service.ProgrammaticLogin()
 #****           Main querry definition                                           ****#
 #************************************************************************************# 
 def FullTextQuery(calendar_service):
-    date = datetime.now().strftime("%Y-%m-%dT%H:%M:%S.000Z")
-    endDate = (datetime.now() + timedelta(days=14)).strftime("%Y-%m-%dT%H:%M:%S.000Z")
     print 'Full text query for events on Primary Calendar: \'%s\'' % (q)
     query = GServ.CalendarEventQuery('default', 'private', 'full', q)
-    query.timeMin = date
-    query.timeMax = endDate
+    query.start_min = date      #  calling date to set the beginning of query range for the present day
+    query.start_max = endDate   #  calling endDate to limit the query range to the next 14 days
     query.singleevents = 'true'
     query.orderBy = 'startTime'
     query.sortorder = 'a'
-    query.max_results = '10 # limit the number of events visible in the print output
     feed = calendar_service.CalendarQuery(query)
     for i, an_event in enumerate(feed.entry):
         for a_when in an_event.when:
