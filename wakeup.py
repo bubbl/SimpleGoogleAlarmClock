@@ -6,19 +6,16 @@
 #
 # Website: http://www.bartbania.com
 #
-import gdata.calendar.service as GServ 
-import gdata.service
-import gdata.calendar # for connection with GCalendar
+import gdata.calendar.service as GServ            #for connection with GCalendar
 import time
 from ConfigParser import SafeConfigParser
-import os, random #to play the mp3 later
- 
-from feed.date.rfc3339 import tf_from_timestamp #also for the comparator
-from datetime import datetime, timedelta #for the time on the rpi end
-from apscheduler.scheduler import Scheduler #this will let us check the calender on a regular interval
-
-#import logging # used for development. Not needed for normal usage.
-#logging.basicConfig(filename='log.log', filemode='w')
+import os
+import random                                     #to play the mp3 later
+from feed.date.rfc3339 import tf_from_timestamp   #also for the comparator
+from datetime import datetime, timedelta          #for the time on the rpi end
+from apscheduler.scheduler import Scheduler       #this will let us check the calender on a regular interval
+#import logging                                   # used for development. Not needed for normal usage.
+#logging.basicConfig(filename='wakeup.log', filemode='w')
 
 #************************************************************************************# 
 #****           Global variables that can be changed in wakeup.cfg file          ****#
@@ -63,11 +60,13 @@ def FullTextQuery(calendar_service):
             if time.strftime('%d-%m-%Y %H:%M',time.localtime(tf_from_timestamp(a_when.start_time))) == time.strftime('%d-%m-%Y %H:%M'):
                 print "Waking you up!"
                 print "---" 
-                songfile = random.choice(os.listdir(mp3_path)) #chooses the .mp3 file
+                songfile = random.choice(os.listdir(mp3_path)) #choosing by random an .mp3 file from direcotry
                 print "Now Playing:", songfile
-                command ="mpg321" + " " + mp3_path + "'"+songfile+"'"+ " -g 100" #plays the MP3 in it's entierty. As long as the song is longer than a minute then will only trigger once in the minute that start of the event
+                # plays the MP3 in it's entierty. As long as the song is longer 
+                # than a minute then will only trigger once in the minute that start of the event
+                command ="mpg321" + " " + mp3_path + "'"+songfile+"'"+ " -g 100" 
                 print command
-                os.system(command) #runs the bash command
+                os.system(command)     #runs the bash command
             else:
                 print "Wait for it..." #the event's start time is not the system's current time
  
@@ -84,5 +83,5 @@ def callable_func():
 #****           Run scheduler service                                            ****#
 #************************************************************************************# 
 sched = Scheduler(standalone=True)
-sched.add_interval_job(callable_func,seconds=10) #define refresh rate. Set to every 10 seconds by default
-sched.start() #runs the program indefinatly on an interval of x seconds
+sched.add_interval_job(callable_func,seconds=10)  #define refresh rate. Set to every 10 seconds by default
+sched.start()                                     #runs the program indefinatly on an interval of x seconds
