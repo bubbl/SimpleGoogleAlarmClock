@@ -28,7 +28,7 @@ password = parser.get('google_credentials', 'password')
 q = parser.get('alarm_clock', 'query')
 mp3_path = parser.get('alarm_clock', 'mp3_path')
 
-date = datetime.now().strftime("%Y-%m-%dT%H:%M:%S.000Z")
+date = (datetime.now() +timedelta(days=-1)).strftime("%Y-%m-%dT%H:%M:%S.000Z")
 endDate = (datetime.now() + timedelta(days=14)).strftime("%Y-%m-%dT%H:%M:%S.000Z")
 
 #************************************************************************************# 
