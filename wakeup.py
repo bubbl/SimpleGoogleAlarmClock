@@ -1,11 +1,8 @@
 #!/usr/bin/env python
-#
-# Simple Google Calendar Alarm Clock
-#
-# Author: Bart Bania
-#
-# Website: http://www.bartbania.com
-#
+## Simple Google Calendar Alarm Clock
+## Author: Bart Bania
+## Website: http://www.bartbania.com
+
 import gdata.calendar.service as GServ            #for connection with GCalendar
 import time
 import os
