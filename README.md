@@ -32,10 +32,3 @@ NOTE: If you’ve never used sound playback on your Raspberry Pi, head [HERE](ht
 or to run it in background:
 <code>> nohup python wakeup.py &</code>
 * To add alarm at specific time/date, just head to Google Calendar and create an Event with phrase **wake** in the title. The phrase can be easily changed in the config file.
-
-#### Todo
-Clean up the code. 
-
-Seriously! It is a mess. 
-
-My excuse? These are my first few lines of Python, ever. ;)
