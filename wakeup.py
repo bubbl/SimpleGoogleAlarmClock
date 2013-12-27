@@ -20,10 +20,10 @@ parser.read('wakeup.cfg')
 #************************************************************************************# 
 #****           Global variables that can be changed in wakeup.cfg file          ****#
 #************************************************************************************# 
-email = parser.get('google_credentials', 'email')
-password = parser.get('google_credentials', 'password')
-q = parser.get('alarm_clock', 'query')
-mp3_path = parser.get('alarm_clock', 'mp3_path')
+email = parser.get('credentials', 'email')
+password = parser.get('credentials', 'password')
+q = parser.get('alarm', 'query')
+mp3_path = parser.get('alarm', 'mp3_path')
 
 date = (datetime.now() +timedelta(days=-1)).strftime("%Y-%m-%dT%H:%M:%S.000Z")
 endDate = (datetime.now() + timedelta(days=14)).strftime("%Y-%m-%dT%H:%M:%S.000Z")
