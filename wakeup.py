@@ -11,8 +11,8 @@ from ConfigParser import SafeConfigParser
 from feed.date.rfc3339 import tf_from_timestamp   #also for the comparator
 from datetime import datetime, timedelta          #for the time on the rpi end
 from apscheduler.scheduler import Scheduler       #this will let us check the calender on a regular interval
-#import logging                                   # used for development. Not needed for normal usage.
-#logging.basicConfig(filename='wakeup.log', filemode='w')
+import logging                                   # used for development. Not needed for normal usage.
+logging.basicConfig(filename='wakeup.log', filemode='w')
 
 parser = SafeConfigParser()                       # initiate Parser and read the configuration file
 parser.read('wakeup.cfg')
