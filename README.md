@@ -32,3 +32,26 @@ NOTE: If you’ve never used sound playback on your Raspberry Pi, head [HERE](ht
 or to run it in background:
 <code>> nohup python wakeup.py &</code>
 * To add alarm at specific time/date, just head to Google Calendar and create an Event with phrase **wake** in the title. The phrase can be easily changed in the config file.
+
+#### The Config file
+
+The Python code doesn't contain any authentication data. I’ve decided to move it to a separate file, as I believe it’s easier for the user to set the variables in a separate place, where no code could be accidentally altered or deleted. The program gets the configuration thanks to ConfigParser that reads the configuration file and passes the variables to the program:
+
+    global email, password, q, mp3_path
+    parser = SafeConfigParser()
+    parser.read('wakeup.cfg')
+    
+    email = parser.get('credentials', 'email')
+    password = parser.get('credentials', 'password')
+    q = parser.get('alarm', 'query')
+    mp3_path = parser.get('alarm', 'mp3_path')
+
+The file is has a structure similar to what you would find on Microsoft Windows INI files. The configuration file consists of sections, led by a [section] header and followed by name = value entries. My config file consists of two sections (just my personal preference) one for credentials and the other for event query and mp3 path:
+
+    [credentials]
+    email = you@gmail.com
+    password = ***
+    
+    [alarm]
+    query = wake
+    mp3_path = /path/to/your/mp3/files/
