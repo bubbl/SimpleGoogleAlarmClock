@@ -24,6 +24,7 @@ email = parser.get('credentials', 'email')
 password = parser.get('credentials', 'password')
 q = parser.get('alarm', 'query')
 mp3_path = parser.get('alarm', 'mp3_path')
+calendar = parser.get('alarm', 'calendar')
 
 date = (datetime.now() +timedelta(days=-1)).strftime("%Y-%m-%dT%H:%M:%S.000Z")
 endDate = (datetime.now() + timedelta(days=14)).strftime("%Y-%m-%dT%H:%M:%S.000Z")
@@ -42,7 +43,7 @@ calendar_service.ProgrammaticLogin()
 #************************************************************************************# 
 def FullTextQuery(calendar_service):
     print 'Full text query for events on Primary Calendar: \'%s\'' % (q)
-    query = GServ.CalendarEventQuery('default', 'private', 'full', q)
+    query = GServ.CalendarEventQuery(calendar, 'private', 'full', q)
     query.start_min = date       #  calling date to set the beginning of query range for the present day
     query.start_max = endDate    #  calling endDate to limit the query range to the next 14 days. change tmedelta(days) to set the range
     query.singleevents = 'true'  #  enables creation of repeating events
