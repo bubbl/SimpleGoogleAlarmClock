@@ -73,8 +73,8 @@ def FullTextQuery(calendar_service):
 #************************************************************************************#
 #****           Create socket for external connections                           ****#
 #************************************************************************************#
-host = ''                                               #Symbolic name, meaning all available interfaces
-port = 8888                                             #Reserve a port for your service.
+HOST = ''                                               #Symbolic name, meaning all available interfaces
+PORT = 8888                                             #Reserve a port for your service.
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)   #Create a socket object
 
 #Bind socket to local host and port
