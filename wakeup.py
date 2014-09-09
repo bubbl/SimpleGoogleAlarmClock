@@ -76,7 +76,6 @@ def FullTextQuery(calendar_service):
 host = ''                                               #Symbolic name, meaning all available interfaces
 port = 8888                                             #Reserve a port for your service.
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)   #Create a socket object
-s.bind((host, port))                                    #Bind to the port
 
 #Bind socket to local host and port
 try:
