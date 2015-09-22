@@ -69,7 +69,7 @@ def FullTextQuery(calendar_service):
  
 #************************************************************************************# 
 #****           Function to be run by Scheduler                                  ****#
-#****           The prints are more for debug than acrual necessity              ****#
+#****           The prints are more for debug than actual necessity              ****#
 #************************************************************************************# 
 def callable_func():
     os.system("clear")
